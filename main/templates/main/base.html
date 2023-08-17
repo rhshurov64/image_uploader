@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Uploader</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-3">
+
+                {% if messages %}
+
+                {% for msg in messages %}
+                <div class="alert alert-success" role="alert">
+                    {{img}}
+                </div>
+
+                {% endfor %}
+
+
+                {% endif %}
+
+                <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Tittle</label>
+                        <input type="text" class="form-control tittle" name='tittle' id="exampleFormControlInput1"
+                            placeholder="Nature">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                        <textarea class="form-control description" name='desc' id="exampleFormControlTextarea1"
+                            rows="3"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Upload Image</label>
+                        <input class="form-control image" name='img' type="file" id="formFile">
+                    </div>
+                    <input type="submit" class="btn btn-secondary" value="Upload">
+                </form>
+
+            </div>
+            <div class="col-8 offset-1">
+                <div class="row">
+                <h1 class="alert alert-secondary">Uploaded Images</h1>
+
+                    {% for img in data %}
+                    <div class="col-6">
+                        <div class="card mb-3 me-3" alt='' style="max-width: 500px; height:170px;">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img src="{{img.image.url}}" class="img-fluid rounded-start" style="height:170px;" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{img.tittle}}</h5>
+                                        <p class="card-text">{{img.desc}}</p>
+                                    </div>
+                                </div>
+    
+                            </div>
+    
+                        </div>
+
+                    </div>
+                    {% endfor %}
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
